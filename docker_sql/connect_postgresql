@@ -1,0 +1,53 @@
+docker run -it \
+    -e POSTGRES_USER="root" \
+    -e POSTGRES_PASSWORD="root" \
+    -e POSTGRES_DB="ny_taxi" \
+    -v $(pwd)/ny_taxi_postegres_data:/var/lib/postgresql/data \
+    -p 5432:5432 \
+    postgres:13
+
+
+docker run -it \
+    -e PGADMIN_DEFAULT_EMAIL="admin@admin.com" \
+    -e PGADMIN_DEFAULT_PASSWORD="root" \
+    -p 8080:80 \
+    dpage/pgadmin4
+    
+
+## Network
+
+docker network create pg-network
+
+docker run -it \
+    -e POSTGRES_USER="root" \
+    -e POSTGRES_PASSWORD="root" \
+    -e POSTGRES_DB="ny_taxi" \
+    -v $(pwd)/ny_taxi_postegres_data:/var/lib/postgresql/data \
+    -p 5432:5432 \
+    --network=pg-network \
+    --name pg-database \
+    postgres:13
+
+docker run -it \
+    -e PGADMIN_DEFAULT_EMAIL="admin@admin.com" \
+    -e PGADMIN_DEFAULT_PASSWORD="root" \
+    -p 8080:80 \
+    --network=pg-network \
+    --name pgadmin \
+    dpage/pgadmin4
+
+# docker run -it \
+#     # Lance le conteneur en mode interactif (-it)
+#     -e POSTGRES_USER="root" \
+#     # Définit une variable d'environnement pour l'utilisateur PostgreSQL avec la valeur "root"
+#     -e POSTGRES_PASSWORD="root" \
+#     # Définit une variable d'environnement pour le mot de passe PostgreSQL avec la valeur "root"
+#     -e POSTGRES_DB="ny_taxi" \
+#     # Définit une variable d'environnement pour le nom de la base de données par défaut : "ny_taxi"
+#     -v $(pwd)/ny_taxi_postegres_data:/var/lib/postgresql/data \
+#     # Monte un volume pour persister les données PostgreSQL entre les exécutions :
+#     # le répertoire local $(pwd)/ny_taxi_postegres_data sera mappé au répertoire /var/lib/postgresql/data du conteneur
+#     -p 5432:5432 \
+#     # Mappe le port 5432 du conteneur au port 5432 de l’hôte, permettant les connexions externes
+#     postgres:13
+#     # Utilise l'image PostgreSQL version 13
