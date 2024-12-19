@@ -1,8 +1,0 @@
-.ipynb_checkpoints
-dt_eng_env
-ny_taxi_postegres_data
-ny_taxi_postgres_data
-*.csv
-*.parquet
-*.json
-pgadmin
