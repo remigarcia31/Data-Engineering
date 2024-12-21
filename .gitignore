@@ -8,6 +8,7 @@ ny_taxi_postgres_data
 pgadmin
 google-cloud-sdk
 .DS_Store
+.env
 
 # Local .terraform directories
 **/.terraform/*
