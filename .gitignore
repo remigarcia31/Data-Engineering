@@ -10,6 +10,7 @@ google-cloud-sdk
 .DS_Store
 .env
 logs/
+__pycache__/
 
 # Local .terraform directories
 **/.terraform/*
