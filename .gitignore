@@ -9,7 +9,7 @@ pgadmin
 google-cloud-sdk
 .DS_Store
 .env
-logs
+logs/
 
 # Local .terraform directories
 **/.terraform/*
