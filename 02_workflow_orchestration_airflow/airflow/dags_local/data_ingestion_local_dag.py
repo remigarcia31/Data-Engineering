@@ -26,9 +26,10 @@ local_workflow = DAG(
     start_date=datetime(2024, 1, 1)
 )
 
-
+# https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2024-02.parquet
 URL_PREFIX = 'https://d37ci6vzurychx.cloudfront.net/trip-data' 
-URL_TEMPLATE = URL_PREFIX + '/yellow_tripdata_{{ execution_date.strftime(\'%Y-%m\') }}.parquet'
+# URL_TEMPLATE = URL_PREFIX + '/yellow_tripdata_{{ execution_date.strftime(\'%Y-%m\') }}.parquet'
+URL_TEMPLATE = URL_PREFIX + '/yellow_tripdata_2024-02.parquet'
 OUTPUT_FILE_TEMPLATE = AIRFLOW_HOME + '/output_{{ execution_date.strftime(\'%Y-%m\') }}.parquet'
 TABLE_NAME_TEMPLATE = 'yellow_taxi_{{ execution_date.strftime(\'%Y_%m\') }}'
 
@@ -48,7 +49,7 @@ with local_workflow:
             port=PG_PORT,
             db=PG_DATABASE,
             table_name=TABLE_NAME_TEMPLATE,
-            csv_file=OUTPUT_FILE_TEMPLATE
+            parquet_file=OUTPUT_FILE_TEMPLATE
         ),
     )
 
